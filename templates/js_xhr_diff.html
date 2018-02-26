@@ -1,0 +1,17 @@
+<html>
+<head>
+    <script type="text/javascript">
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:5001/test', true);
+        xhr.onload = function () {
+          // Request finished. Do processing here.
+        };
+        xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
+        xhr.send(null);
+        document.getElementsByTagName('body').innerHTML = xhr.responseText;
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -64,3 +64,16 @@ def post_from_diff():
 @app.route("/iframe_src_js")
 def iframe_src_js():
     return render_template('iframe_src_js.html')
+
+
+# iframe loading from js xhr same domain
+@app.route("/js_xhr_same")
+def js_xhr_same():
+    return render_template('js_xhr_same.html')
+
+
+@app.route("/js_xhr_diff")
+def js_xhr_diff():
+    resp = flask.Response(render_template('js_xhr_diff.html'))
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
