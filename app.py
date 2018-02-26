@@ -11,7 +11,9 @@ def home():
 
 @app.route("/test", methods=['GET', 'POST'])
 def same():
-    return render_template('microphone_test.html')
+    resp = flask.Response(render_template('microphone_test.html'))
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
 
 
 # Using iframe's source
@@ -75,5 +77,4 @@ def js_xhr_same():
 @app.route("/js_xhr_diff")
 def js_xhr_diff():
     resp = flask.Response(render_template('js_xhr_diff.html'))
-    resp.headers.add('Access-Control-Allow-Origin', '*')
     return resp
