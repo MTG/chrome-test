@@ -22,8 +22,6 @@
 
     function handleError(error) {
       console.log('navigator.getUserMedia error: ', error);
-      var message = document.getElementById("message");
-      message.innerHTML = "Microphone not accessible";
     }
 
     navigator.mediaDevices.getUserMedia(constraints).
