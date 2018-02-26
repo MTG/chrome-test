@@ -1,3 +1,4 @@
+import flask
 from flask import Flask
 from flask import render_template
 app = Flask(__name__)
@@ -22,17 +23,19 @@ def iframe_src_same():
 
 @app.route("/iframe_src_diff")
 def iframe_src_diff():
-    return render_template('iframe_source_diff.html')
+    return render_template('iframe_src_diff.html')
 
 
 @app.route("/iframe_src_diff_allow")
 def iframe_src_diff_allow():
-    return render_template('iframe_source_diff_allow.html')
+    return render_template('iframe_src_diff_allow.html')
 
 
 @app.route("/iframe_src_diff_header")
 def iframe_src_diff_header():
-    return render_template('iframe_source_diff_header.html')
+    resp = flask.Response(render_template('iframe_src_diff.html'))
+    resp.headers["Feature-Policy"] = "microphone 'self' http://localhost:5001"
+    return resp
 
 # Using a form to fill the iframe
 
