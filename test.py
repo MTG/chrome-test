@@ -58,3 +58,9 @@ def get_from_diff():
 @app.route("/post_from_diff")
 def post_from_diff():
     return render_template('post_from_diff.html')
+
+
+# iframe same domain loading js from different domain
+@app.route("/iframe_src_js")
+def iframe_src_js():
+    return render_template('iframe_src_js.html')
