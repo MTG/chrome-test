@@ -2,17 +2,16 @@
 <head>
 </head>
 <body>
-<div id="content">
-
-</div>
+<div id="content"></div>
 
 </body>
     <script type="text/javascript">
         function reqListener () {
-            theframe = document.getElementById("myframe");
-            console.debug(this.reponseText);
-			content = document.getElementById("content");
-			content.innerHTML = this.responseText;
+            ifr = document.createElement("iframe");
+            ifr.innerHTML = this.responseText;
+
+            content = document.getElementById("content");
+            content.appendChild(ifr);
         }
 
         var xhr = new XMLHttpRequest();

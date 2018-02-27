@@ -1,7 +1,3 @@
-<html>
-
-<head>
-    <script>
     var audio = document.querySelector('audio');
 
     var constraints = window.constraints = {
@@ -30,13 +26,4 @@
 
     navigator.mediaDevices.getUserMedia(constraints).
         then(handleSuccess).catch(handleError);
-</script>
-</head>
 
-<body>
-    <div id="message">
-    </div>
-
-</body>
-
-</html>
