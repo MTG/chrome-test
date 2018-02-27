@@ -7,52 +7,62 @@ Tests for the cross-origin iframe permissions
 <ol>
     <li>
         <a href="{{ url_for('microphone_embed')}}">
-            Directly access microphone (succeeds)
+            Directly access microphone
         </a>
+        <mark>Success</mark>
     </li>
     <li>
         <a href="{{ url_for('iframe_src_same')}}">
-            Embed iframe from same host (succeeds)
+            Embed iframe from same host
         </a>
+        <mark>Success</mark>
     </li>
     <li>
         <a href="{{ url_for('iframe_src_diff')}}">
-            Embed iframe from different host (fails)
+            Embed iframe from different host
         </a>
+        <mark>Fail</mark>
     </li>
     <li>
         <a href="{{ url_for('iframe_src_diff_allow')}}">
-            Embed iframe from different host with allow attr (succeeds)
+            Embed iframe from different host with allow attr
         </a>
+        <mark>Success</mark>
     </li>
     <li>
         <a href="{{ url_for('iframe_src_diff_header')}}">
-            Embed iframe from different host with Feature-Policy header (succeeds)
+            Embed iframe from different host with Feature-Policy header
         </a>
+        <mark>Success</mark>
     </li>
     <li>
         <a href="{{ url_for('form_get_samehost')}}">
-            Populate iframe with form target attr, same host (succeeds)
+            Populate iframe with form target attr, same host
         </a>
+        <mark>Success</mark>
     </li>
     <li>
         <a href="{{ url_for('form_get_diffhost')}}">
-            Populate iframe with form target attr, different host (fails)
+            Populate iframe with form target attr, different host
         </a>
+        <mark>Fail</mark>
     </li>
     <li>
         <a href="{{ url_for('form_get_from_diff_policy')}}">
             Populate iframe with form target attr, different host, Feature-Policy set (succeeds)
         </a>
+        <mark>Success</mark>
     </li>
     <li>
         <a href="{{ url_for('form_post_from_diff_policy')}}">
             Populate iframe with form target attr, POST, different host, Feature-Policy set (succeeds)
         </a>
+        <mark>Success</mark>
     </li>
     <li>
         <a href="{{ url_for('post_from_diff_policy_and_allow')}}">
             Populate iframe with form target attr, POST, different host, Feature-Policy set and allow=microphone attribute (fails)
+        <mark>Fail</mark>
         </a>
     </li>
 </ol>

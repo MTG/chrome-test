@@ -30,7 +30,7 @@ def microphone_js():
 # Using iframe with src element
 
 @app.route("/iframe_src")
-def iframe_src_same():
+def iframe_src():
     """ An iframe loading a page from the same host should succeed """
     return render_template('iframe.html', iframe_host=MY_HOST)
 
@@ -70,7 +70,7 @@ def form_get_diffhost():
 
 
 @app.route("/form_get_diff_policy")
-def form_get_from_diff_policy():
+def form_get_diff_policy():
     """ Using a form's target attribute to fill an iframe (different host with policy header, succeeds) """
     resp = Response(render_template('form.html', iframe_host=OTHER_HOST, form_method='GET'))
     resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
