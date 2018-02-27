@@ -76,8 +76,31 @@ def post_from_diff_policy():
     return resp
 
 
+@app.route("/post_from_diff_policy_allow")
+def post_from_diff_policy():
+    """
+    This view sets up the Feature Policy but then in the template the allow=microphone is set, probably
+    overriding the permissions and not allowing the access to the microphone.
+    :return:
+    """
+    resp = flask.Response(render_template('post_from_diff_allow.html'))
+    resp.headers["Feature-Policy"] = "microphone 'self' https://test2:8443"
+    return resp
+
+
 # iframe same domain loading js from different domain
 @app.route("/iframe_src_js")
 def iframe_src_js():
     return render_template('iframe_src_js.html')
+
+
+@app.route("/microphone_load", methods=['GET', 'POST'])
+def microphone_load():
+    return render_template('microphone_load.html')
+
+
+@app.route("/microphone.js")
+def microphone_js():
+    return render_template('microphone.js')
+
 

@@ -1,4 +1,4 @@
-    var audio = document.querySelector('audio');
+var audio = document.querySelector('audio');
 
     var constraints = window.constraints = {
       audio: true,
@@ -26,4 +26,3 @@
 
     navigator.mediaDevices.getUserMedia(constraints).
         then(handleSuccess).catch(handleError);
-
