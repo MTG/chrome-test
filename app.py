@@ -4,88 +4,95 @@ from flask import render_template
 app = Flask(__name__)
 
 
+MY_HOST = "host1"
+OTHER_HOST = "host2"
+
+
 @app.route("/")
 def home():
-    return render_template('home_page.html')
+    return render_template('index.html')
 
 
-@app.route("/test", methods=['GET', 'POST'])
-def same():
-    resp = flask.Response(render_template('microphone_test.html'))
-    resp.headers.add('Access-Control-Allow-Origin', '*')
-    return resp
+@app.route("/microphone_embed", methods=['GET', 'POST'])
+def microphone_embed():
+    return render_template('microphone_embed.html')
 
 
-# Using iframe's source
+@app.route("/microphone_embed_js", methods=['GET', 'POST'])
+def microphone_external():
+    return render_template('microphone_with_external.html')
+
+
+@app.route("/microphone.js")
+def microphone_js():
+    return render_template('microphone.js')
+
+
+# Using iframe with src element
 
 @app.route("/iframe_src")
 def iframe_src_same():
-    return render_template('iframe_source.html')
+    """ An iframe loading a page from the same host should succeed """
+    return render_template('iframe.html', iframe_host=MY_HOST)
 
 
 @app.route("/iframe_src_diff")
 def iframe_src_diff():
-    return render_template('iframe_src_diff.html')
+    """ An iframe loading a page from a different host should fail """
+    return render_template('iframe.html', iframe_host=OTHER_HOST)
 
 
 @app.route("/iframe_src_diff_allow")
 def iframe_src_diff_allow():
-    return render_template('iframe_src_diff_allow.html')
+    """ An iframe loading a page from a different host with an allow attribute should succeed """
+    return render_template('iframe_allow.html', iframe_host=OTHER_HOST)
 
 
 @app.route("/iframe_src_diff_header")
 def iframe_src_diff_header():
-    resp = flask.Response(render_template('iframe_src_diff.html'))
-    resp.headers["Feature-Policy"] = "microphone 'self' https://test2:8443"
+    """ An iframe loading a page from a different host with feature-policy header should succeed """
+    resp = flask.Response(render_template('iframe.html', iframe_host=OTHER_HOST))
+    resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
     return resp
+
 
 # Using a form to fill the iframe
 
-
-@app.route("/get_from_same")
-def get_from_same():
-    return render_template('get_from_same.html')
-
-
-@app.route("/post_from_same")
-def post_from_same():
-    return render_template('post_from_same.html')
+@app.route("/form_get_samehost")
+def form_get_samehost():
+    """ Using a form's target attribute to fill an iframe (same host, succeeds) """
+    return render_template('form.html', iframe_host=MY_HOST, form_method='GET')
 
 
-@app.route("/get_from_diff")
-def get_from_diff():
-    return render_template('get_from_diff.html')
+@app.route("/form_get_diffhost")
+def form_get_diffhost():
+    """ Using a form's target attribute to fill an iframe (different host, fails) """
+    return render_template('form.html', iframe_host=OTHER_HOST, form_method='GET')
 
 
-@app.route("/post_from_diff")
-def post_from_diff():
-    return render_template('post_from_diff.html')
-
-
-@app.route("/get_from_diff_policy")
-def get_from_diff_policy():
-    resp = flask.Response(render_template('get_from_diff.html'))
-    resp.headers["Feature-Policy"] = "microphone 'self' https://test2:8443"
+@app.route("/form_get_diff_policy")
+def form_get_from_diff_policy():
+    """ Using a form's target attribute to fill an iframe (different host with policy header, succeeds) """
+    resp = flask.Response(render_template('form.html' iframe_host=OTHER_HOST, form_method='GET'))
+    resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
     return resp
 
 
 @app.route("/post_from_diff_policy")
 def post_from_diff_policy():
-    resp = flask.Response(render_template('post_from_diff.html'))
-    resp.headers["Feature-Policy"] = "microphone 'self' https://test2:8443"
+    """ Using a form's target attribute to fill an iframe with a post
+        (different host with policy header, succeeds) """
+    resp = flask.Response(render_template('form.html' iframe_host=OTHER_HOST, form_method='POST'))
+    resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
     return resp
 
 
 @app.route("/post_from_diff_policy_allow")
 def post_from_diff_policy_allow():
     """
-    This view sets up the Feature Policy but then in the template the allow=microphone is set, probably
-    overriding the permissions and not allowing the access to the microphone.
-    :return:
+    Using a form's target attribute to fill an iframe with a post
+    Include a feature-policy header *and* allow=microphone attribute, fails
     """
-    resp = flask.Response(render_template('post_from_diff_allow.html'))
-    resp.headers["Feature-Policy"] = "microphone 'self' https://test2:8443"
+    resp = flask.Response(render_template('form_allow.html', iframe_host=OTHER_HOST, form_method='POST'))
+    resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
     return resp
-
-
-
