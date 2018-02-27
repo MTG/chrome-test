@@ -88,19 +88,4 @@ def post_from_diff_policy_allow():
     return resp
 
 
-# iframe same domain loading js from different domain
-@app.route("/iframe_src_js")
-def iframe_src_js():
-    return render_template('iframe_src_js.html')
-
-
-@app.route("/microphone_load", methods=['GET', 'POST'])
-def microphone_load():
-    return render_template('microphone_load.html')
-
-
-@app.route("/microphone.js")
-def microphone_js():
-    return render_template('microphone.js')
-
 

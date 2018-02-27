@@ -1,0 +1,70 @@
+<html>
+<head>
+</head>
+<body>
+Tests for the cross-origin iframe permissions
+
+<ol>
+    <li>
+        <a href="{{ url_for('same')}}">
+            Access microphone
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('iframe_src_same')}}">
+            Access microphone from iframe
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('iframe_src_diff')}}">
+            Access microphone from iframe different domain
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('iframe_src_diff_allow')}}">
+            Access microphone from iframe different domain, allow=microphone
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('iframe_src_diff_header')}}">
+            Access microphone from iframe different domain, Feature-Policy set
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('get_from_same')}}">
+            Access microphone from iframe using get form
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('post_from_same')}}">
+            Access microphone from iframe using post form
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('get_from_diff')}}">
+            Access microphone from iframe different domain using get form
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('post_from_diff')}}">
+            Access microphone from iframe different domain using post form
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('get_from_diff_policy')}}">
+            Access microphone from iframe different domain using get form, Feature-Policy set
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('post_from_diff_policy')}}">
+            Access microphone from iframe different domain using post form, Feature-Policy set
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('post_from_diff_policy_allow')}}">
+            Access microphone from iframe different domain using post form, Feature-Policy set and allow=microphone set
+        </a>
+    </li>
+</ol>
+</body>
+</html>
