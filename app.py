@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Test app for chrome issue"
+    return render_template('home_page.html')
 
 
 @app.route("/test", methods=['GET', 'POST'])
@@ -77,7 +77,7 @@ def post_from_diff_policy():
 
 
 @app.route("/post_from_diff_policy_allow")
-def post_from_diff_policy():
+def post_from_diff_policy_allow():
     """
     This view sets up the Feature Policy but then in the template the allow=microphone is set, probably
     overriding the permissions and not allowing the access to the microphone.
