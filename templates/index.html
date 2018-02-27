@@ -6,63 +6,53 @@ Tests for the cross-origin iframe permissions
 
 <ol>
     <li>
-        <a href="{{ url_for('same')}}">
-            Access microphone
+        <a href="{{ url_for('microphone_embed')}}">
+            Directly access microphone (succeeds)
         </a>
     </li>
     <li>
         <a href="{{ url_for('iframe_src_same')}}">
-            Access microphone from iframe
+            Embed iframe from same host (succeeds)
         </a>
     </li>
     <li>
         <a href="{{ url_for('iframe_src_diff')}}">
-            Access microphone from iframe different domain
+            Embed iframe from different host (fails)
         </a>
     </li>
     <li>
         <a href="{{ url_for('iframe_src_diff_allow')}}">
-            Access microphone from iframe different domain, allow=microphone
+            Embed iframe from different host with allow attr (succeeds)
         </a>
     </li>
     <li>
         <a href="{{ url_for('iframe_src_diff_header')}}">
-            Access microphone from iframe different domain, Feature-Policy set
+            Embed iframe from different host with Feature-Policy header (succeeds)
         </a>
     </li>
     <li>
-        <a href="{{ url_for('get_from_same')}}">
-            Access microphone from iframe using get form
+        <a href="{{ url_for('form_get_samehost')}}">
+            Populate iframe with form target attr, same host (succeeds)
         </a>
     </li>
     <li>
-        <a href="{{ url_for('post_from_same')}}">
-            Access microphone from iframe using post form
+        <a href="{{ url_for('form_get_diffhost')}}">
+            Populate iframe with form target attr, different host (fails)
         </a>
     </li>
     <li>
-        <a href="{{ url_for('get_from_diff')}}">
-            Access microphone from iframe different domain using get form
+        <a href="{{ url_for('form_get_from_diff_policy')}}">
+            Populate iframe with form target attr, different host, Feature-Policy set (succeeds)
         </a>
     </li>
     <li>
-        <a href="{{ url_for('post_from_diff')}}">
-            Access microphone from iframe different domain using post form
+        <a href="{{ url_for('form_post_from_diff_policy')}}">
+            Populate iframe with form target attr, POST, different host, Feature-Policy set (succeeds)
         </a>
     </li>
     <li>
-        <a href="{{ url_for('get_from_diff_policy')}}">
-            Access microphone from iframe different domain using get form, Feature-Policy set
-        </a>
-    </li>
-    <li>
-        <a href="{{ url_for('post_from_diff_policy')}}">
-            Access microphone from iframe different domain using post form, Feature-Policy set
-        </a>
-    </li>
-    <li>
-        <a href="{{ url_for('post_from_diff_policy_allow')}}">
-            Access microphone from iframe different domain using post form, Feature-Policy set and allow=microphone set
+        <a href="{{ url_for('post_from_diff_policy_and_allow')}}">
+            Populate iframe with form target attr, POST, different host, Feature-Policy set and allow=microphone attribute (fails)
         </a>
     </li>
 </ol>

@@ -1,6 +1,5 @@
-import flask
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, Response
+
 app = Flask(__name__)
 
 
@@ -51,7 +50,7 @@ def iframe_src_diff_allow():
 @app.route("/iframe_src_diff_header")
 def iframe_src_diff_header():
     """ An iframe loading a page from a different host with feature-policy header should succeed """
-    resp = flask.Response(render_template('iframe.html', iframe_host=OTHER_HOST))
+    resp = Response(render_template('iframe.html', iframe_host=OTHER_HOST))
     resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
     return resp
 
@@ -73,26 +72,26 @@ def form_get_diffhost():
 @app.route("/form_get_diff_policy")
 def form_get_from_diff_policy():
     """ Using a form's target attribute to fill an iframe (different host with policy header, succeeds) """
-    resp = flask.Response(render_template('form.html' iframe_host=OTHER_HOST, form_method='GET'))
+    resp = Response(render_template('form.html', iframe_host=OTHER_HOST, form_method='GET'))
     resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
     return resp
 
 
 @app.route("/post_from_diff_policy")
-def post_from_diff_policy():
+def form_post_from_diff_policy():
     """ Using a form's target attribute to fill an iframe with a post
         (different host with policy header, succeeds) """
-    resp = flask.Response(render_template('form.html' iframe_host=OTHER_HOST, form_method='POST'))
+    resp = Response(render_template('form.html', iframe_host=OTHER_HOST, form_method='POST'))
     resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
     return resp
 
 
 @app.route("/post_from_diff_policy_allow")
-def post_from_diff_policy_allow():
+def post_from_diff_policy_and_allow():
     """
     Using a form's target attribute to fill an iframe with a post
     Include a feature-policy header *and* allow=microphone attribute, fails
     """
-    resp = flask.Response(render_template('form_allow.html', iframe_host=OTHER_HOST, form_method='POST'))
+    resp = Response(render_template('form_allow.html', iframe_host=OTHER_HOST, form_method='POST'))
     resp.headers["Feature-Policy"] = "microphone 'self' https://{}:8443".format(OTHER_HOST)
     return resp
