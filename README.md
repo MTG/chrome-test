@@ -36,5 +36,9 @@ Just run
 
     FLASK_APP=app.py FLASK_DEBUG=1 flask run
 
-### 4. Access https://host1:8443
+### 4. Load page
+
+Go to https://host1:8433 and https://host2:8433 to accept the https cert error/warning message
+
+Visit https://host1:8433 for the main entrypoint
 

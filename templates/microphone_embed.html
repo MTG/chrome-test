@@ -2,8 +2,6 @@
 
 <head>
     <script>
-    var audio = document.querySelector('audio');
-
     var constraints = window.constraints = {
       audio: true,
       video: false
@@ -16,16 +14,14 @@
       stream.oninactive = function() {
         console.log('Stream ended');
       };
-      window.stream = stream; // make variable available to browser console
-      audio.srcObject = stream;
+      var message = document.getElementById("message");
+      message.innerHTML = "Microphone activated";
     }
 
     function handleError(error) {
       console.log('navigator.getUserMedia error: ', error);
-      if (error.name == "NotAllowedError"){
-          var message = document.getElementById("message");
-          message.innerHTML = "Microphone not accessible";
-      }
+      var message = document.getElementById("message");
+      message.innerHTML = "Microphone not accessible";
     }
 
     navigator.mediaDevices.getUserMedia(constraints).

@@ -48,20 +48,20 @@ Tests for the cross-origin iframe permissions
         <mark>Fail</mark>
     </li>
     <li>
-        <a href="{{ url_for('form_get_from_diff_policy')}}">
-            Populate iframe with form target attr, different host, Feature-Policy set (succeeds)
+        <a href="{{ url_for('form_post_from_diff_policy')}}">
+            Populate iframe with form target attr, POST, different host, Feature-Policy set
         </a>
         <mark>Success</mark>
     </li>
     <li>
-        <a href="{{ url_for('form_post_from_diff_policy')}}">
-            Populate iframe with form target attr, POST, different host, Feature-Policy set (succeeds)
+        <a href="{{ url_for('post_from_diff_allow')}}">
+            Populate iframe with form target attr, different host, allow=microphone attribute
+        <mark>Fail</mark>
         </a>
-        <mark>Success</mark>
     </li>
     <li>
         <a href="{{ url_for('post_from_diff_policy_and_allow')}}">
-            Populate iframe with form target attr, POST, different host, Feature-Policy set and allow=microphone attribute (fails)
+            Populate iframe with form target attr, POST, different host, Feature-Policy set and allow=microphone attribute
         <mark>Fail</mark>
         </a>
     </li>
