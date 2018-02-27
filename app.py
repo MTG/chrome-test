@@ -36,7 +36,7 @@ def iframe_src_diff_allow():
 @app.route("/iframe_src_diff_header")
 def iframe_src_diff_header():
     resp = flask.Response(render_template('iframe_src_diff.html'))
-    resp.headers["Feature-Policy"] = "microphone 'self' http://localhost:5001"
+    resp.headers["Feature-Policy"] = "microphone 'self' https://test2:8443"
     return resp
 
 # Using a form to fill the iframe
@@ -61,17 +61,18 @@ def get_from_diff():
 def post_from_diff():
     return render_template('post_from_diff.html')
 
+
 @app.route("/get_from_diff_policy")
 def get_from_diff_policy():
     resp = flask.Response(render_template('get_from_diff.html'))
-    resp.headers["Feature-Policy"] = "microphone 'self' https://other.domain:8443"
+    resp.headers["Feature-Policy"] = "microphone 'self' https://test2:8443"
     return resp
 
 
 @app.route("/post_from_diff_policy")
 def post_from_diff_policy():
     resp = flask.Response(render_template('post_from_diff.html'))
-    resp.headers["Feature-Policy"] = "microphone 'self' https://other.domain:8443"
+    resp.headers["Feature-Policy"] = "microphone 'self' https://test2:8443"
     return resp
 
 
@@ -80,14 +81,3 @@ def post_from_diff_policy():
 def iframe_src_js():
     return render_template('iframe_src_js.html')
 
-
-# iframe loading from js xhr same domain
-@app.route("/iframe_xhr_same")
-def js_xhr_same():
-    return render_template('iframe_xhr_same.html')
-
-
-@app.route("/iframe_xhr_diff")
-def js_xhr_diff():
-    resp = flask.Response(render_template('js_xhr_diff.html'))
-    return resp
